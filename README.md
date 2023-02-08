@@ -10,4 +10,4 @@ Automatic download pause and resume when the internet connection is poor and oka
 Audio Download in Highest Quality
 
 
-MORE FEATURES TO COME
+MORE FEATURES TO COME.

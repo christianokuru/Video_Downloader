@@ -4,6 +4,9 @@ All you have to do is get the video link and paste it in the prompt and click en
 
 NB: The video sizes you'll see there aren't the actual video sizes....Those are just estimates
 
+
+The video will be downloaded in the same file path where the python script is saved
+
 //////////////////MAIN FEATURES\\\\\\\\\\\\\\\\\\\\\\
 Download videos from other sitesapart from YouTube.
 Automatic download pause and resume when the internet connection is poor and okay, respectively.

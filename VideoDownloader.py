@@ -1,6 +1,7 @@
 import subprocess
 import socket
 import time
+import os
 
 class VideoDownloader:
     def __init__(self):
@@ -14,8 +15,14 @@ class VideoDownloader:
             ("1440p", "2560x1440", "Approx. 4 GB"),
             ("2160p", "3840x2160", "Approx. 8 GB")
         ]
+        self.download_folder = "video_downloads"
+
+    def create_download_folder(self):
+        if not os.path.exists(self.download_folder):
+            os.mkdir(self.download_folder)
 
     def download_video(self, url):
+        self.create_download_folder()
         print("Available resolutions:")
         for i, (resolution, resolution_size, video_size) in enumerate(self.resolutions):
             print(f"{i + 1}. {resolution} ({resolution_size}) - {video_size}")
@@ -28,7 +35,7 @@ class VideoDownloader:
             try:
                 socket.create_connection(("www.google.com", 80), 2)
                 print("Internet connection is good, starting download...")
-                subprocess.run(["youtube-dl", "-f", format_string, url])
+                subprocess.run(["youtube-dl", "-f", format_string, "-o", f"{self.download_folder}/%(title)s.%(ext)s", url])
                 break
             except OSError:
                 print("Poor network connection detected, pausing download...")
@@ -36,7 +43,8 @@ class VideoDownloader:
                 print("Resuming download...")
 
     def download_audio(self, url):
-        subprocess.run(["youtube-dl", "-f", "bestaudio/best", "-x", "--audio-quality", "0", url])
+        self.create_download_folder()
+        subprocess.run(["youtube-dl", "-f", "bestaudio/best", "-x", "--audio-quality", "0", "-o", f"{self.download_folder}/%(title)s.%(ext)s", url])
 
 video_downloader = VideoDownloader()
 url = input("Enter the YouTube video link: ")
